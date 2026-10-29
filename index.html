@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supply Chain & Inventory Analytics</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1f2937}header{padding:28px 4%;background:#152b45;color:white}
+main{padding:24px 4%;max-width:1400px;margin:auto}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.card,.chart{background:white;border-radius:12px;padding:18px;box-shadow:0 2px 10px #0000000b}.card small{color:#64748b}.card strong{display:block;font-size:25px;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-top:16px}.note{background:#fff7ed;border-left:4px solid #f59e0b;padding:14px;margin:18px 0;border-radius:6px}
+</style></head><body>
+<header><h1>Supply Chain & Inventory Analytics</h1><p>Inventory health, replenishment risk, sales and supplier performance</p></header>
+<main><section class="cards">
+<div class="card"><small>Observations</small><strong>91,250</strong></div>
+<div class="card"><small>SKUs</small><strong>50</strong></div>
+<div class="card"><small>Warehouses</small><strong>5</strong></div>
+<div class="card"><small>Units sold</small><strong>1,829,979</strong></div>
+<div class="card"><small>Sales value*</small><strong>33,426,337</strong></div>
+<div class="card"><small>Gross profit*</small><strong>11,088,201</strong></div>
+<div class="card"><small>Gross margin</small><strong>33.17%</strong></div>
+<div class="card"><small>Below reorder point</small><strong>5.25%</strong></div>
+</section>
+<div class="note"><b>Interpretation:</b> Reorder risk is calculated at the observation level (Inventory_Level &lt; Reorder_Point). Monetary units/currency are unspecified. Inventory value summed across daily observations should not be read as a point-in-time balance.</div>
+<section class="grid">
+<div class="chart"><h3>Monthly Units Sold</h3><div id="monthly"></div></div>
+<div class="chart"><h3>Top 10 SKUs by Sales Value</h3><div id="sku"></div></div>
+<div class="chart"><h3>Reorder Risk by Warehouse</h3><div id="warehouse"></div></div>
+<div class="chart"><h3>Supplier Average Lead Time</h3><div id="supplier"></div></div>
+</section><p style="color:#64748b;font-size:12px;margin-top:20px">Built from the published dataset. Supplementary analysis and dashboard packaging; source repository remains credited.</p></main>
+<script>
+const monthly=[{"Date": "2024-01", "Units_Sold": 176681}, {"Date": "2024-02", "Units_Sold": 197188}, {"Date": "2024-03", "Units_Sold": 231596}, {"Date": "2024-04", "Units_Sold": 223793}, {"Date": "2024-05", "Units_Sold": 210841}, {"Date": "2024-06", "Units_Sold": 170013}, {"Date": "2024-07", "Units_Sold": 134915}, {"Date": "2024-08", "Units_Sold": 99019}, {"Date": "2024-09", "Units_Sold": 76304}, {"Date": "2024-10", "Units_Sold": 79599}, {"Date": "2024-11", "Units_Sold": 98105}, {"Date": "2024-12", "Units_Sold": 131925}];
+const sku=[{"SKU_ID": "SKU_38", "sales": 1057641.51, "risk": 0.0536986301369863}, {"SKU_ID": "SKU_40", "sales": 923848.62, "risk": 0.04986301369863014}, {"SKU_ID": "SKU_11", "sales": 888870.07, "risk": 0.05150684931506849}, {"SKU_ID": "SKU_48", "sales": 846494.22, "risk": 0.05150684931506849}, {"SKU_ID": "SKU_31", "sales": 827241.09, "risk": 0.05095890410958904}, {"SKU_ID": "SKU_22", "sales": 794945.99, "risk": 0.054246575342465755}, {"SKU_ID": "SKU_46", "sales": 789467.78, "risk": 0.052054794520547946}, {"SKU_ID": "SKU_37", "sales": 772557.65, "risk": 0.055342465753424656}, {"SKU_ID": "SKU_4", "sales": 770679.65, "risk": 0.0526027397260274}, {"SKU_ID": "SKU_20", "sales": 760349.9, "risk": 0.056438356164383564}];
+const wh=[{"Warehouse_ID": "WH_1", "Region": "East", "units": 92863, "risk": 0.05271149674620391}, {"Warehouse_ID": "WH_1", "Region": "North", "units": 93435, "risk": 0.052294557097118465}, {"Warehouse_ID": "WH_1", "Region": "South", "units": 90841, "risk": 0.05181231932399377}, {"Warehouse_ID": "WH_1", "Region": "West", "units": 89763, "risk": 0.05271422162404666}, {"Warehouse_ID": "WH_2", "Region": "East", "units": 91119, "risk": 0.04395604395604396}, {"Warehouse_ID": "WH_2", "Region": "North", "units": 90138, "risk": 0.05533421868083223}, {"Warehouse_ID": "WH_2", "Region": "South", "units": 92544, "risk": 0.05391835843702249}, {"Warehouse_ID": "WH_2", "Region": "West", "units": 92277, "risk": 0.05585742229950011}, {"Warehouse_ID": "WH_3", "Region": "East", "units": 93430, "risk": 0.05088732093222151}, {"Warehouse_ID": "WH_3", "Region": "North", "units": 92133, "risk": 0.05825878245690596}, {"Warehouse_ID": "WH_3", "Region": "South", "units": 89532, "risk": 0.05267857142857143}, {"Warehouse_ID": "WH_3", "Region": "West", "units": 91015, "risk": 0.04944567627494457}, {"Warehouse_ID": "WH_4", "Region": "East", "units": 90965, "risk": 0.05073577860751153}, {"Warehouse_ID": "WH_4", "Region": "North", "units": 91938, "risk": 0.05250596658711217}, {"Warehouse_ID": "WH_4", "Region": "South", "units": 92877, "risk": 0.04905578467549381}, {"Warehouse_ID": "WH_4", "Region": "West", "units": 89995, "risk": 0.05512162463735773}, {"Warehouse_ID": "WH_5", "Region": "East", "units": 91584, "risk": 0.05215669014084507}, {"Warehouse_ID": "WH_5", "Region": "North", "units": 92205, "risk": 0.05459707359685521}, {"Warehouse_ID": "WH_5", "Region": "South", "units": 91160, "risk": 0.048079034028540066}, {"Warehouse_ID": "WH_5", "Region": "West", "units": 90165, "risk": 0.05708661417322835}];
+const sup=[{"Supplier_ID": "SUP_1", "lead": 8.107142857142858, "risk": 0.05195694716242662}, {"Supplier_ID": "SUP_10", "lead": 7.407407407407407, "risk": 0.05286656519533232}, {"Supplier_ID": "SUP_2", "lead": 8.423076923076923, "risk": 0.05279241306638567}, {"Supplier_ID": "SUP_3", "lead": 8.26086956521739, "risk": 0.052650387135199525}, {"Supplier_ID": "SUP_4", "lead": 8.64, "risk": 0.052712328767123284}, {"Supplier_ID": "SUP_5", "lead": 6.956521739130435, "risk": 0.051816557474687316}, {"Supplier_ID": "SUP_6", "lead": 7.9, "risk": 0.052465753424657535}, {"Supplier_ID": "SUP_7", "lead": 7.5588235294117645, "risk": 0.052054794520547946}, {"Supplier_ID": "SUP_8", "lead": 8.5, "risk": 0.05313111545988258}, {"Supplier_ID": "SUP_9", "lead": 8.1875, "risk": 0.052054794520547946}];
+Plotly.newPlot('monthly',[{x:monthly.map(x=>x.Date),y:monthly.map(x=>x.Units_Sold),type:'scatter',mode:'lines+markers'}],{margin:{t:10,l:50,r:10,b:45},xaxis:{title:'Month'},yaxis:{title:'Units'}},{responsive:true});
+Plotly.newPlot('sku',[{x:sku.map(x=>x.SKU_ID),y:sku.map(x=>x.sales),type:'bar'}],{margin:{t:10,l:50,r:10,b:45},yaxis:{title:'Sales value*'}},{responsive:true});
+Plotly.newPlot('warehouse',[{x:wh.map(x=>x.Warehouse_ID),y:wh.map(x=>x.risk*100),type:'bar',text:wh.map(x=>x.Region),hovertemplate:'%{x}<br>Risk: %{y:.2f}%<br>Region: %{text}<extra></extra>'}],{margin:{t:10,l:50,r:10,b:45},yaxis:{title:'Below reorder records (%)'}},{responsive:true});
+Plotly.newPlot('supplier',[{x:sup.map(x=>x.Supplier_ID),y:sup.map(x=>x.lead),type:'bar'}],{margin:{t:10,l:50,r:10,b:45},yaxis:{title:'Average lead time (days)'}},{responsive:true});
+</script></body></html>
